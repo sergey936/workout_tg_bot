@@ -1,18 +1,18 @@
-from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
+from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 
 from messages.base import BaseMessageBuilder
 
 
 class StartMessageBuilder(BaseMessageBuilder):
     _text = (
-        "Привет, чтобы пользоваться этим ботом необходимо пройти регистрацию"
+        'Привет, чтобы пользоваться этим ботом необходимо пройти регистрацию',
     )
     _reply_markup = InlineKeyboardMarkup(
         inline_keyboard=[
             [
                 InlineKeyboardButton(
-                    text="Пройти регистрацию", callback_data="registration"
-                )
-            ]
-        ]
+                    text='Пройти регистрацию', callback_data='registration',
+                ),
+            ],
+        ],
     )

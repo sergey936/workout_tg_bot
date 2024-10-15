@@ -6,7 +6,7 @@ from dataclasses import dataclass
 class ApplicationException(Exception):
     @property
     def message(self):
-        return "Application Error"
+        return 'Application Error'
 
 
 @dataclass(frozen=True, eq=False)
@@ -20,4 +20,4 @@ class BaseWebException(ApplicationException):
 
     @property
     def error_text(self) -> dict:
-        return self.response_json.get("detail", {}).get("error", "")
+        return self.response_json.get('detail', {}).get('error', '')

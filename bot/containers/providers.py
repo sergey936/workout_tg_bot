@@ -1,9 +1,12 @@
 from aiogram import Bot, Dispatcher
-from dishka import provide, Provider, Scope
-from httpx import AsyncClient
+
+from dishka import Provider, Scope, provide
 
 from domain.services.user.web import UserWebService
-from domain.use_cases.user import RegistrationUseCase
+from domain.use_cases.user import CheckTGUserExistsUseCase, RegistrationUseCase
+
+from httpx import AsyncClient
+
 from settings.config import Config
 
 
@@ -31,5 +34,11 @@ class DefaultProvider(Provider):
     @provide(scope=Scope.REQUEST)
     def get_registration_use_case(self) -> RegistrationUseCase:
         return RegistrationUseCase(
+            user_service=self.get_user_web_service(),
+        )
+
+    @provide(scope=Scope.REQUEST)
+    def get_check_user_exists_use_case(self) -> CheckTGUserExistsUseCase:
+        return CheckTGUserExistsUseCase(
             user_service=self.get_user_web_service(),
         )

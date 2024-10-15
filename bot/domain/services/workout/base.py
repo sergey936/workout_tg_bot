@@ -5,5 +5,5 @@ from dataclasses import dataclass
 @dataclass
 class BaseWorkoutService(ABC):
     @abstractmethod
-    async def create_workout(self) -> None:
+    async def create_workout(self, title: str, description: str) -> None:
         ...

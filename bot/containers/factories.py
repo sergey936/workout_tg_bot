@@ -1,8 +1,8 @@
 from functools import lru_cache
 
-from dishka import AsyncContainer, make_async_container
-
 from containers.providers import DefaultProvider
+
+from dishka import AsyncContainer, make_async_container
 
 
 @lru_cache(1)

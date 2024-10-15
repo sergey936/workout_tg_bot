@@ -27,3 +27,7 @@ class BaseUserService(ABC):
         token: str,
         tg_id: str,
     ) -> None: ...
+
+    @abstractmethod
+    async def check_tg_user_exists(self, tg_id: str) -> bool:
+        ...

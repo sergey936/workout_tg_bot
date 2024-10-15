@@ -32,3 +32,18 @@ class RegistrationUseCase(BaseUseCase[RegistrationUserCommand, None]):
             token=token,
             tg_id=command.user.tg_id,
         )
+
+
+@dataclass
+class CheckTGUserExistsCommand:
+    tg_id: str
+
+
+@dataclass
+class CheckTGUserExistsUseCase(BaseUseCase[CheckTGUserExistsCommand, None]):
+    user_service: BaseUserService
+
+    async def execute(self, command: CheckTGUserExistsCommand) -> None:
+        return await self.user_service.check_tg_user_exists(
+            tg_id=command.tg_id,
+        )
