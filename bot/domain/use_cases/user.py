@@ -40,10 +40,10 @@ class CheckTGUserExistsCommand:
 
 
 @dataclass
-class CheckTGUserExistsUseCase(BaseUseCase[CheckTGUserExistsCommand, None]):
+class CheckTGUserExistsUseCase(BaseUseCase[CheckTGUserExistsCommand, bool]):
     user_service: BaseUserService
 
-    async def execute(self, command: CheckTGUserExistsCommand) -> None:
+    async def execute(self, command: CheckTGUserExistsCommand) -> bool:
         return await self.user_service.check_tg_user_exists(
             tg_id=command.tg_id,
         )

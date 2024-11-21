@@ -14,6 +14,8 @@ class MenuMessageBuilder(BaseMessageBuilder):
                 KeyboardButton(
                     text='Обновить тренировку', callback_data='test',
                 ),
+            ],
+            [
                 KeyboardButton(
                     text='Удалить тренировку', callback_data='test',
                 ),

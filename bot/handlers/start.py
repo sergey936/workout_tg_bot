@@ -29,13 +29,13 @@ async def start_command_handler(message: types.Message):
     container = get_container()
 
     async with container() as request_container:
-        registration_use_case: RegistrationUseCase = (
+        registration_use_case: CheckTGUserExistsUseCase = (
             await request_container.get(CheckTGUserExistsUseCase)
         )
 
         user_exists = await registration_use_case.execute(
             CheckTGUserExistsCommand(
-                    tg_id=message.from_user.id,
+                    tg_id=str(message.from_user.id),
             ),
         )
 

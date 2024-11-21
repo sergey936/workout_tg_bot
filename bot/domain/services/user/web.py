@@ -87,7 +87,7 @@ class UserWebService(BaseUserService):
 
     async def check_tg_user_exists(self, tg_id: str) -> bool:
         response = await self.http_client.get(
-            url=f'{self.base_url}users/tg-id-exists',
+            url=f'{self.base_url}users/exists',
             headers={
                 'api-token': self.api_token,
                 'tg-user-id': str(tg_id),
