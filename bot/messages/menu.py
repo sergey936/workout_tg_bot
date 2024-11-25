@@ -9,19 +9,15 @@ class MenuMessageBuilder(BaseMessageBuilder):
         keyboard=[
             [
                 KeyboardButton(
-                    text='Создать тренировку', callback_data='test',
+                    text='Создать тренировку',
                 ),
                 KeyboardButton(
-                    text='Обновить тренировку', callback_data='test',
+                    text='Список тренировок',
                 ),
             ],
             [
                 KeyboardButton(
-                    text='Удалить тренировку', callback_data='test',
-                ),
-                KeyboardButton(
                     text='Посмотреть список моих тренировок',
-                    callback_data='test',
                 ),
             ],
         ],

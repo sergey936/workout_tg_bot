@@ -6,7 +6,7 @@ from exceptions.user import (
     CheckTgUserExistsRequestError,
     GetTokenRequestError,
     RegistrationRequestError,
-    SetTelegramIDRequestError,
+    SetTelegramIDRequestError, BecomeTrainerRequestError,
 )
 
 from httpx import AsyncClient
@@ -101,3 +101,18 @@ class UserWebService(BaseUserService):
             )
 
         return response.json()['exists']
+
+    async def become_trainer(self, tg_id: str) -> None:
+        response = await self.http_client.put(
+            url=f'{self.base_url}users/trainer',
+            headers={
+                'api-token': self.api_token,
+                'tg-user-id': str(tg_id),
+            },
+        )
+
+        if not response.is_success:
+            raise BecomeTrainerRequestError(
+                status_code=response.status_code,
+                response_content=response.content.decode(),
+            )

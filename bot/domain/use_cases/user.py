@@ -22,7 +22,6 @@ class RegistrationUseCase(BaseUseCase[RegistrationUserCommand, None]):
             second_name=command.user.second_name,
             patronymic=command.user.patronymic,
         )
-
         token = await self.user_service.get_token(
             email=command.user.email,
             password=command.user.password,
@@ -31,6 +30,9 @@ class RegistrationUseCase(BaseUseCase[RegistrationUserCommand, None]):
         await self.user_service.set_tg_id(
             token=token,
             tg_id=command.user.tg_id,
+        )
+        await self.user_service.become_trainer(
+
         )
 
 

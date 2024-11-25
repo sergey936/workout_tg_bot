@@ -30,3 +30,10 @@ class CheckTgUserExistsRequestError(BaseWebException):
     @property
     def message(self):
         return 'Set telegram id error'
+
+
+@dataclass(frozen=True, eq=False)
+class BecomeTrainerRequestError(BaseWebException):
+    @property
+    def message(self):
+        return 'Become trainer error'

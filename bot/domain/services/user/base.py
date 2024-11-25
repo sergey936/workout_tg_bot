@@ -31,3 +31,7 @@ class BaseUserService(ABC):
     @abstractmethod
     async def check_tg_user_exists(self, tg_id: str) -> bool:
         ...
+
+    @abstractmethod
+    async def become_trainer(self, tg_id: str) -> None:
+        ...

@@ -52,6 +52,7 @@ async def start_registration_callback_handler(
 ):
     await callback.answer()
     await state.set_state(Registration.first_name)
+
     await state.update_data(tg_id=callback.from_user.id)
     await callback.message.answer('Введите ваше имя')
 
@@ -62,6 +63,7 @@ async def registration_get_first_name_command_handler(
 ):
     await state.update_data(first_name=message.text)
     await state.set_state(Registration.second_name)
+
     await message.answer('Введите вашу фамилию')
 
 
@@ -71,6 +73,7 @@ async def registration_get_second_name_command_handler(
 ):
     await state.update_data(second_name=message.text)
     await state.set_state(Registration.email)
+
     await message.answer('Введите вашу почту')
 
 
@@ -80,6 +83,7 @@ async def registration_get_email_command_handler(
 ):
     await state.update_data(email=message.text)
     await state.set_state(Registration.password)
+
     await message.answer('Введите ваш пароль')
 
 
@@ -89,13 +93,14 @@ async def complete_registration_command_handler(
 ):
     container = get_container()
 
+    await state.update_data(password=message.text)
+    data = await state.get_data()
+
     async with container() as request_container:
         registration_use_case: RegistrationUseCase = (
             await request_container.get(RegistrationUseCase)
         )
 
-        await state.update_data(password=message.text)
-        data = await state.get_data()
         try:
             await registration_use_case.execute(
                 RegistrationUserCommand(
@@ -111,12 +116,8 @@ async def complete_registration_command_handler(
             )
         else:
             await message.answer(
-                f'Регистрация завершена: {await state.get_data()}',
+                'Регистрация завершена',
             )
 
         await state.clear()
 
-
-@router.message(F.text)
-async def all_non_commands_text_handler(message: types.Message):
-    await message.answer('Я не знаю такую команду')
