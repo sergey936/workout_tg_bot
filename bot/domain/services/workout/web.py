@@ -5,7 +5,8 @@ from typing import Iterable, Any
 from domain.dtos.workout import WorkoutDTO
 from domain.services.workout.base import BaseWorkoutService
 
-from exceptions.workout import CreateWorkoutRequestError, GetAllWorkoutsRequestError, UploadWorkoutFileRequestError
+from exceptions.workout import CreateWorkoutRequestError, GetAllWorkoutsRequestError, UploadWorkoutFileRequestError, \
+    GetWorkoutInfoRequestError
 
 from httpx import AsyncClient
 
@@ -81,3 +82,20 @@ class WebWorkoutService(BaseWorkoutService):
             )
 
         return [WorkoutDTO.from_web(workout=workout) for workout in response.json()['items']]
+
+    async def get_workout_info(self, workout_id: str, tg_id: int) -> WorkoutDTO:
+        response = await self.http_client.get(
+            url=f'{self.base_url}workouts/{workout_id}',
+            headers={
+                'api-token': self.api_token,
+                'tg-user-id': str(tg_id),
+                'Authorization': 'Bearer',
+            },
+        )
+        if not response.is_success:
+            raise GetWorkoutInfoRequestError(
+                status_code=response.status_code,
+                response_content=response.content.decode(),
+            )
+
+        return WorkoutDTO.from_web(response.json())

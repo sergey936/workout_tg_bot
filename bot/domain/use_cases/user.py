@@ -32,7 +32,7 @@ class RegistrationUseCase(BaseUseCase[RegistrationUserCommand, None]):
             tg_id=command.user.tg_id,
         )
         await self.user_service.become_trainer(
-
+            tg_id=command.user.tg_id,
         )
 
 

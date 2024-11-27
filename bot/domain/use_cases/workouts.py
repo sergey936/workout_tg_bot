@@ -56,3 +56,21 @@ class CreateWorkoutUseCase(BaseUseCase[CreateWorkoutCommand, None]):
             tg_id=command.tg_id,
             file_format=command.file_format,
         )
+
+
+@dataclass
+class GetWorkoutCommand:
+    workout_id: str
+    tg_id: int
+
+
+
+@dataclass
+class GetWorkoutUseCase(BaseUseCase[GetWorkoutCommand, WorkoutDTO]):
+    workout_service: BaseWorkoutService
+
+    async def execute(self, command: GetWorkoutCommand) -> WorkoutDTO:
+        return await self.workout_service.get_workout_info(
+            workout_id=command.workout_id,
+            tg_id=command.tg_id,
+        )

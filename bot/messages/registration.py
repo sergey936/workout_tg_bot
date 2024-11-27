@@ -1,10 +1,10 @@
-from aiogram.types import KeyboardButton, ReplyKeyboardMarkup
+from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
 
 from messages.base import BaseMessageBuilder
 
 
-class MenuMessageBuilder(BaseMessageBuilder):
-    _text = 'Добро пожаловать'
+class RegistrationCompleteMessageBuilder(BaseMessageBuilder):
+    _text = 'Регистрация завершена'
     _reply_markup = ReplyKeyboardMarkup(
         keyboard=[
             [

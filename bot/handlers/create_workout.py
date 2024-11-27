@@ -4,6 +4,8 @@ from aiogram.fsm.context import FSMContext
 from containers.factories import get_container
 from domain.use_cases.workouts import CreateWorkoutUseCase, CreateWorkoutCommand
 from exceptions.base import BaseWebException
+from messages.create_workout import CreateWorkoutMessageBuilder
+from messages.error import ErrorMessageBuilder
 from states.create_workout import CreateWorkout
 
 router = Router()
@@ -74,18 +76,13 @@ async def create_workout_get_file_message_handler(
                 )
             )
         except BaseWebException as err:
-            await message.answer(
-                f'Ошибка во время создания тренировки: {err.error_text}',
-            )
+            await message.answer(**ErrorMessageBuilder().build())
         else:
-            await message.answer(
-                'Тренировка создана',
-            )
+            await message.answer(**CreateWorkoutMessageBuilder().build())
 
     await state.clear()
 
 
 @router.message(F.text)
 async def all_non_commands_text_handler(message: types.Message):
-
     await message.answer(f'Я не знаю такую команду: {message.text}')

@@ -7,12 +7,14 @@ from handlers.create_workout import router as create_workout_router
 
 from handlers.start import router as start_router
 from handlers.get_workouts import router as get_workout_router
+from handlers.workout_info import router as workout_info_router
 
 
 async def register_handlers(dispatcher: Dispatcher) -> None:
     dispatcher.include_router(router=start_router)
     dispatcher.include_router(router=get_workout_router)
     dispatcher.include_router(router=create_workout_router)
+    dispatcher.include_router(router=workout_info_router)
 
 
 async def start_bot():

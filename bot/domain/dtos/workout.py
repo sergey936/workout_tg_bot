@@ -1,5 +1,7 @@
 from dataclasses import dataclass
 
+from callbacks.workout import WorkoutCbData
+
 
 @dataclass
 class WorkoutDTO:

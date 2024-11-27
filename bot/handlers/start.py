@@ -15,8 +15,10 @@ from domain.use_cases.user import (
 )
 
 from exceptions.base import BaseWebException
+from messages.error import ErrorMessageBuilder
 
 from messages.menu import MenuMessageBuilder
+from messages.registration import RegistrationCompleteMessageBuilder
 from messages.start import StartMessageBuilder
 
 from states.registration import Registration
@@ -110,14 +112,9 @@ async def complete_registration_command_handler(
                 ),
             )
 
-        except BaseWebException as err:
-            await message.answer(
-                f'Ошибка во время регистрации: {err.error_text}',
-            )
+        except BaseWebException:
+            await message.answer(**ErrorMessageBuilder().build())
         else:
-            await message.answer(
-                'Регистрация завершена',
-            )
+            await message.answer(**RegistrationCompleteMessageBuilder().build())
 
         await state.clear()
-

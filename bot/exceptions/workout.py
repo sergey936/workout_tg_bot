@@ -20,6 +20,14 @@ class GetAllWorkoutsRequestError(BaseWebException):
 
 
 @dataclass(frozen=True, eq=False)
+class GetWorkoutInfoRequestError(BaseWebException):
+
+    @property
+    def message(self):
+        return 'Get workout info error'
+
+
+@dataclass(frozen=True, eq=False)
 class UploadWorkoutFileRequestError(BaseWebException):
 
     @property

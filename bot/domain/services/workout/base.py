@@ -20,3 +20,7 @@ class BaseWorkoutService(ABC):
     @abstractmethod
     async def upload_workout_file(self, file: BytesIO, workout_id: str, tg_id: int, file_format: str) -> None:
         ...
+
+    @abstractmethod
+    async def get_workout_info(self, workout_id: str, tg_id: int) -> WorkoutDTO:
+        ...

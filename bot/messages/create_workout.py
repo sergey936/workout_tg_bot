@@ -1,10 +1,10 @@
-from aiogram.types import KeyboardButton, ReplyKeyboardMarkup
+from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
 
 from messages.base import BaseMessageBuilder
 
 
-class MenuMessageBuilder(BaseMessageBuilder):
-    _text = 'Добро пожаловать'
+class CreateWorkoutMessageBuilder(BaseMessageBuilder):
+    _text = 'Тренировка создана'
     _reply_markup = ReplyKeyboardMarkup(
         keyboard=[
             [
@@ -23,3 +23,4 @@ class MenuMessageBuilder(BaseMessageBuilder):
         ],
         resize_keyboard=True,
     )
+

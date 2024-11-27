@@ -8,7 +8,7 @@ from domain.use_cases.user import CheckTGUserExistsUseCase, RegistrationUseCase
 
 from httpx import AsyncClient
 
-from domain.use_cases.workouts import GetAllWorkoutsUseCase, CreateWorkoutUseCase
+from domain.use_cases.workouts import GetAllWorkoutsUseCase, CreateWorkoutUseCase, GetWorkoutUseCase
 from settings.config import Config
 
 
@@ -62,5 +62,11 @@ class DefaultProvider(Provider):
     @provide(scope=Scope.REQUEST)
     def get_create_workout_use_case(self) -> CreateWorkoutUseCase:
         return CreateWorkoutUseCase(
+            workout_service=self.get_workout_web_service()
+        )
+
+    @provide(scope=Scope.REQUEST)
+    def get_workout_info_use_case(self) -> GetWorkoutUseCase:
+        return GetWorkoutUseCase(
             workout_service=self.get_workout_web_service()
         )
